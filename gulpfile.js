@@ -23,6 +23,7 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
     .pipe($.if(dev, $.sourcemaps.write()))
     .pipe(gulp.dest('.tmp/styles'))
+    .pipe(gulp.dest('dist/styles'))
     .pipe(reload({stream: true}));
 });
 
@@ -166,8 +167,8 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+gulp.task('build', ['lint', 'html', 'styles','images', 'fonts', 'extras'], () => {
+  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: false}));
 });
 
 gulp.task('default', () => {
